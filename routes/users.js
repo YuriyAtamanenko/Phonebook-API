@@ -6,13 +6,21 @@ const {
   getCurrentUser,
   updateSubscription,
 } = require("../controlers/user");
-const { validateAuth } = require("../middlewares/validateAuth");
-const { validateToken } = require("../middlewares/validateToken");
+const {
+  validateAuth,
+  validateToken,
+  validateUpdateSubscription,
+} = require("../middlewares");
 
 router.post("/register", validateAuth, registration);
 router.post("/login", validateAuth, login);
 router.post("/logout", validateToken, logout);
 router.get("/current", validateToken, getCurrentUser);
-router.patch("/", validateToken, updateSubscription);
+router.patch(
+  "/",
+  validateToken,
+  validateUpdateSubscription,
+  updateSubscription
+);
 
 module.exports = router;

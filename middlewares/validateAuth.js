@@ -23,4 +23,4 @@ const validateAuth = (req, res, next) => {
   next();
 };
 
-module.exports = { validateAuth };
+module.exports = validateAuth;

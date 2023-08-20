@@ -1,9 +1,9 @@
 const express = require("express");
 const {
+  validateToken,
   validateData,
   validateStatusData,
-} = require("../../middlewares/validateData");
-const { validateToken } = require("../../middlewares/validateToken");
+} = require("../../middlewares");
 
 const {
   getAllContacts,
