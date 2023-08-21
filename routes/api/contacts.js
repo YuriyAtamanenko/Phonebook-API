@@ -1,8 +1,9 @@
 const express = require("express");
 const {
+  validateToken,
   validateData,
   validateStatusData,
-} = require("../../middlewares/validateData");
+} = require("../../middlewares");
 
 const {
   getAllContacts,
@@ -15,16 +16,21 @@ const {
 
 const router = express.Router();
 
-router.get("/", getAllContacts);
+router.get("/", validateToken, getAllContacts);
 
-router.get("/:contactId", getContactById);
+router.get("/:contactId", validateToken, getContactById);
 
-router.post("/", validateData, addContact);
+router.post("/", validateToken, validateData, addContact);
 
-router.delete("/:contactId", removeContact);
+router.delete("/:contactId", validateToken, removeContact);
 
-router.put("/:contactId", validateData, updateContact);
+router.put("/:contactId", validateToken, validateData, updateContact);
 
-router.patch("/:contactId/favorite", validateStatusData, updateStatusContact);
+router.patch(
+  "/:contactId/favorite",
+  validateToken,
+  validateStatusData,
+  updateStatusContact
+);
 
 module.exports = router;
