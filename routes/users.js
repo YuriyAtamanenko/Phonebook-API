@@ -5,11 +5,13 @@ const {
   logout,
   getCurrentUser,
   updateSubscription,
+  updateUserAvatar,
 } = require("../controlers/user");
 const {
   validateAuth,
   validateToken,
   validateUpdateSubscription,
+  uploadImage,
 } = require("../middlewares");
 
 router.post("/register", validateAuth, registration);
@@ -21,6 +23,12 @@ router.patch(
   validateToken,
   validateUpdateSubscription,
   updateSubscription
+);
+router.patch(
+  "/avatars",
+  validateToken,
+  uploadImage.single("avatar"),
+  updateUserAvatar
 );
 
 module.exports = router;
