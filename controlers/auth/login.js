@@ -29,6 +29,7 @@ const login = async (req, res) => {
   });
 
   const user = { email: result.email, subscription: result.subscription };
+
   return res.status(200).json({ token, user });
 };
 
