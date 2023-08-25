@@ -4,6 +4,13 @@ const path = require("path");
 const Jimp = require("jimp");
 
 const updateUserAvatar = async (req, res) => {
+  console.log("req.file", req.file);
+  if (!req.file) {
+    return res.status(400).json({
+      message: "File not found",
+    });
+  }
+
   const { filename } = req.file;
 
   const tmpPath = path.join(__dirname, "../../tmp", filename);
