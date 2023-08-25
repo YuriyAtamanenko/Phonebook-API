@@ -2,6 +2,7 @@ const validateAuth = require("./validateAuth");
 const { validateData, validateStatusData } = require("./validateData");
 const validateToken = require("./validateToken");
 const validateUpdateSubscription = require("./validateUpdateSubscription");
+const uploadImage = require("./uploadImage");
 
 module.exports = {
   validateAuth,
@@ -9,4 +10,5 @@ module.exports = {
   validateStatusData,
   validateToken,
   validateUpdateSubscription,
+  uploadImage,
 };
