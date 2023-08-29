@@ -1,6 +1,8 @@
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
+const sendEmail = require("../../helppers/sendEmail");
+const { nanoid } = require("nanoid");
 
 const registration = async (req, res) => {
   const { email, password } = req.body;
@@ -9,11 +11,21 @@ const registration = async (req, res) => {
 
   const avatarURL = gravatar.url(email);
 
+  const vid = nanoid();
+
   try {
     const result = await User.create({
       email,
       password: hashedPassword,
       avatarURL,
+      verificationToken: vid,
+    });
+
+    await sendEmail({
+      to: email,
+      subject: "Hello! I'm test message for verify",
+      text: "Hello! I'm test text for verify",
+      html: `<a href="localhost:3000/users/verify/${vid}">Confirm your email</a>`,
     });
 
     const user = { email: result.email, subscription: result.subscription };
@@ -24,6 +36,9 @@ const registration = async (req, res) => {
         message: "Email in use",
       });
     }
+
+    console.dir("ERROR", error.message);
+    return res.status(403).json({ message: error.message });
   }
 };
 

@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const emailRegexp = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
+const emailRegexp = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 
 const userSchema = new Schema(
   {
@@ -23,6 +23,14 @@ const userSchema = new Schema(
     avatarURL: {
       type: String,
       default: "",
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required"],
     },
   },
   {
