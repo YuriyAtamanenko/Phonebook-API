@@ -22,7 +22,7 @@ const resendEmail = async (req, res) => {
     to: email,
     subject: "Hello! I'm test message for verify",
     text: "Hello! I'm test text for verify",
-    html: `<a href="localhost:3000/users/verify/${user.vid}">Confirm your email</a>`,
+    html: `<a href="http://localhost:3000/users/verify/${user.vid}">Confirm your email</a>`,
   });
 
   return res.status(200).json({

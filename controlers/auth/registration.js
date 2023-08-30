@@ -25,7 +25,7 @@ const registration = async (req, res) => {
       to: email,
       subject: "Hello! I'm test message for verify",
       text: "Hello! I'm test text for verify",
-      html: `<a href="localhost:3000/users/verify/${vid}">Confirm your email</a>`,
+      html: `<a href="http://localhost:3000/users/verify/${vid}">Confirm your email</a>`,
     });
 
     const user = { email: result.email, subscription: result.subscription };
