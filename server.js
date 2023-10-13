@@ -5,6 +5,8 @@ dotenv.config();
 
 const { DB_HOST } = process.env;
 
+mongoose.set("strictQuery", true);
+
 mongoose
   .connect(DB_HOST)
   .then(() =>
