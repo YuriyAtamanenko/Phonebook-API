@@ -1,8 +1,14 @@
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
+
 // const sendEmail = require("../../helppers/sendEmail");
 // const { nanoid } = require("nanoid");
+
+const { JWT_SECRET } = process.env;
 
 const registration = async (req, res) => {
   const { name, email, password } = req.body;
@@ -29,8 +35,12 @@ const registration = async (req, res) => {
     //   html: `<a href="http://localhost:3000/users/verify/${vid}">Confirm your email</a>`,
     // });
 
+    const token = jwt.sign({ id: result.id }, JWT_SECRET, {
+      expiresIn: "12h",
+    });
+
     const user = { email: result.email, name: result.name };
-    return res.status(201).json({ user });
+    return res.status(201).json({ token, user });
   } catch (error) {
     if (error.message.includes("E11000 duplicate key")) {
       return res.status(409).json({
