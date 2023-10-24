@@ -3,8 +3,8 @@ const router = express.Router();
 const {
   registration,
   login,
-  verifyEmail,
-  resendEmail,
+  // verifyEmail,
+  // resendEmail,
 } = require("../controlers/auth");
 const {
   logout,
@@ -17,7 +17,7 @@ const {
   validateToken,
   validateUpdateSubscription,
   uploadImage,
-  validateEmail,
+  // validateEmail,
 } = require("../middlewares");
 
 router.post("/register", validateAuth, registration);
@@ -36,7 +36,7 @@ router.patch(
   uploadImage.single("avatar"),
   updateUserAvatar
 );
-router.get("/verify/:verificationToken", verifyEmail);
-router.post("/verify", validateEmail, resendEmail);
+// router.get("/verify/:verificationToken", verifyEmail);
+// router.post("/verify", validateEmail, resendEmail);
 
 module.exports = router;

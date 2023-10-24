@@ -4,6 +4,10 @@ const emailRegexp = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+    },
     password: {
       type: String,
       required: [true, "Set password for user"],
@@ -24,14 +28,14 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
-    },
+    // verify: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // verificationToken: {
+    //   type: String,
+    //   required: [true, "Verify token is required"],
+    // },
   },
   {
     versionKey: false,

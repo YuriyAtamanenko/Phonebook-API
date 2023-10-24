@@ -17,11 +17,11 @@ const login = async (req, res) => {
     });
   }
 
-  if (!result.verify) {
-    return res.status(401).json({
-      message: "Verification failed",
-    });
-  }
+  // if (!result.verify) {
+  //   return res.status(401).json({
+  //     message: "Verification failed",
+  //   });
+  // }
 
   const isValidPassword = await bcrypt.compare(password, result.password);
   if (!isValidPassword) {
