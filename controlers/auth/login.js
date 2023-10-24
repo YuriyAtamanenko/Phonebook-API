@@ -34,7 +34,11 @@ const login = async (req, res) => {
     expiresIn: "12h",
   });
 
-  const user = { email: result.email, subscription: result.subscription };
+  const user = {
+    name: result.name,
+    email: result.email,
+    subscription: result.subscription,
+  };
 
   return res.status(200).json({ token, user });
 };
