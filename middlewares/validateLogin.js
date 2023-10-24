@@ -1,9 +1,6 @@
 const Joi = require("joi");
 
-const authSchema = Joi.object({
-  name: Joi.string().required().messages({
-    "any.required": "missing required name field",
-  }),
+const loginSchema = Joi.object({
   email: Joi.string().email().required().messages({
     "any.required": "missing required email field",
   }),
@@ -12,12 +9,12 @@ const authSchema = Joi.object({
   }),
 });
 
-const validateAuth = (req, res, next) => {
+const validateLogin = (req, res, next) => {
   if (!Object.keys(req.body).length || !req.body) {
     return res.status(400).json({ message: "missing fields" });
   }
 
-  const { error } = authSchema.validate(req.body);
+  const { error } = loginSchema.validate(req.body);
 
   if (error) {
     return res.status(400).json({ message: `${error.details[0].message}` });
@@ -26,4 +23,4 @@ const validateAuth = (req, res, next) => {
   next();
 };
 
-module.exports = validateAuth;
+module.exports = validateLogin;

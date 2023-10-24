@@ -13,15 +13,16 @@ const {
   updateUserAvatar,
 } = require("../controlers/user");
 const {
-  validateAuth,
+  validateRegister,
+  validateLogin,
   validateToken,
   validateUpdateSubscription,
   uploadImage,
   // validateEmail,
 } = require("../middlewares");
 
-router.post("/register", validateAuth, registration);
-router.post("/login", validateAuth, login);
+router.post("/register", validateRegister, registration);
+router.post("/login", validateLogin, login);
 router.post("/logout", validateToken, logout);
 router.get("/current", validateToken, getCurrentUser);
 router.patch(
