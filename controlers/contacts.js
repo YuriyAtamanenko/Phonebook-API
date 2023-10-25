@@ -36,16 +36,19 @@ const addContact = async (req, res) => {
   const { _id: owner } = req.user;
 
   const newContact = await Contact.create({ ...req.body, owner });
+
   return res.status(201).json(newContact);
 };
 
 const removeContact = async (req, res) => {
   const id = req.params;
   const removedContact = await Contact.findByIdAndDelete(id.contactId);
+
   if (!removedContact) {
     return res.status(404).json({ message: "Not found" });
   }
-  return res.json({ message: "contact deleted" });
+
+  return res.json({ message: "contact deleted", _id: removedContact._id });
 };
 
 const updateContact = async (req, res) => {

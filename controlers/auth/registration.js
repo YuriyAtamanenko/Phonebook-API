@@ -39,7 +39,12 @@ const registration = async (req, res) => {
       expiresIn: "12h",
     });
 
-    const user = { email: result.email, name: result.name };
+    const user = {
+      name: result.name,
+      email: result.email,
+      avatar: result.avatarURL,
+    };
+
     return res.status(201).json({ token, user });
   } catch (error) {
     if (error.message.includes("E11000 duplicate key")) {
